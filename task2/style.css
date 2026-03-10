@@ -1,0 +1,45 @@
+body{
+font-family: Arial;
+padding:20px;
+background:#f4f4f4;
+}
+
+h2{
+text-align:center;
+}
+
+.controls{
+margin-bottom:15px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+background:white;
+}
+
+th,td{
+padding:10px;
+border:1px solid #ddd;
+text-align:center;
+}
+
+th{
+background:#007BFF;
+color:white;
+}
+
+button{
+padding:8px 12px;
+margin-left:5px;
+cursor:pointer;
+}
+
+select{
+padding:6px;
+}
+
+ul{
+background:white;
+padding:15px;
+}
