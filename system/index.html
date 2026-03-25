@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Control System</title>
+    <!-- Link to CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Inventory & Stock Tracker</h1>
+        </header>
+
+        <!-- Section: Add Category -->
+        <section class="card">
+            <h2>1. Manage Categories</h2>
+            <div class="form-row">
+                <input type="text" id="newCategory" placeholder="Enter new category name...">
+                <button onclick="addCategory()" class="btn btn-primary">Add Category</button>
+            </div>
+        </section>
+
+        <!-- Section: Add Product -->
+        <section class="card">
+            <h2>2. Add New Product</h2>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Product Name</label>
+                    <input type="text" id="prodName" placeholder="e.g., Wireless Mouse">
+                </div>
+                <div class="form-group">
+                    <label>SKU Code</label>
+                    <input type="text" id="prodSku" placeholder="e.g., ELEC-001">
+                </div>
+                <div class="form-group">
+                    <label>Category</label>
+                    <select id="prodCat">
+                        <option value="">Loading categories...</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Quantity</label>
+                    <input type="number" id="prodQty" value="0">
+                </div>
+                <div class="form-group">
+                    <label>Price (₹)</label>
+                    <input type="number" id="prodPrice" step="0.01" placeholder="0.00">
+                </div>
+                <div class="form-group">
+                    <label>&nbsp;</label>
+                    <button onclick="addProduct()" class="btn btn-success full-width">Save Product</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Stock List -->
+        <section class="card">
+            <h2>3. Current Stock</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>SKU</th>
+                        <th>Category</th>
+                        <th>Qty</th>
+                        <th>Price</th>
+                        <th>Stock In/Out</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody id="inventoryTable">
+                    <!-- JavaScript will fill this -->
+                </tbody>
+            </table>
+        </section>
+    </div>
+
+    <!-- Link to JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
