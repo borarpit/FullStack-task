@@ -1,0 +1,47 @@
+body{
+font-family: Arial;
+background:#f4f4f4;
+}
+
+.container{
+width:350px;
+margin:120px auto;
+background:white;
+padding:20px;
+border-radius:8px;
+box-shadow:0 0 10px rgba(0,0,0,0.2);
+text-align:center;
+}
+
+h2{
+margin-bottom:20px;
+}
+
+.balance{
+margin-bottom:20px;
+font-size:18px;
+}
+
+input{
+width:90%;
+padding:8px;
+margin:10px 0;
+}
+
+button{
+width:95%;
+padding:10px;
+background:#28a745;
+color:white;
+border:none;
+cursor:pointer;
+}
+
+button:hover{
+background:#218838;
+}
+
+#message{
+margin-top:15px;
+font-weight:bold;
+}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login Page</title>
+<link rel="stylesheet" href="style.css">
+
+<script>
+function validateForm() {
+
+let email = document.forms["loginForm"]["email"].value;
+let password = document.forms["loginForm"]["password"].value;
+
+if(email == ""){
+document.getElementById("error").innerHTML="Email is required";
+return false;
+}
+
+if(password == ""){
+document.getElementById("error").innerHTML="Password is required";
+return false;
+}
+
+if(password.length < 5){
+document.getElementById("error").innerHTML="Password must be at least 5 characters";
+return false;
+}
+
+return true;
+}
+</script>
+
+</head>
+
+<body>
+
+<div class="login-box">
+
+<h2>Login</h2>
+
+<p id="error" style="color:red;"></p>
+
+<form name="loginForm" action="login.php" method="POST" onsubmit="return validateForm()">
+
+<label>Email</label>
+<input type="text" name="email">
+
+<label>Password</label>
+<input type="password" name="password">
+
+<button type="submit">Login</button>
+
+</form>
+
+</div>
+
+</body>
+</html>
