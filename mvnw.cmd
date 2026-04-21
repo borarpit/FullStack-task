@@ -1,4 +1,2 @@
-activeProfiles=pom.xml
 eclipse.preferences.version=1
-resolveWorkspaceProjects=true
-version=1
+spring.boot.launch.profile.history=db3;db2;

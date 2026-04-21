@@ -1,5 +1,4 @@
 eclipse.preferences.version=1
-encoding//src/main/java=UTF-8
-encoding//src/main/resources=UTF-8
-encoding//src/test/java=UTF-8
-encoding/<project>=UTF-8
+org.eclipse.jdt.apt.aptEnabled=true
+org.eclipse.jdt.apt.genSrcDir=target/generated-sources/annotations
+org.eclipse.jdt.apt.genTestSrcDir=target/generated-test-sources/test-annotations
