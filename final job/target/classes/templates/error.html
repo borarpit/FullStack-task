@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Error - JobPortal</title>
+    <th:block th:replace="~{fragments :: headerContent}"></th:block>
+</head>
+<body>
+    <div th:replace="~{fragments :: navbar}"></div>
+
+    <div class="container" style="text-align: center; padding-top: 5rem;">
+        <div class="card" style="max-width: 600px; margin: 0 auto;">
+            <h1 style="font-size: 4rem; color: var(--danger);">Oops!</h1>
+            <h2 style="margin-bottom: 1.5rem;">Something went wrong</h2>
+            <p style="color: var(--text-light); margin-bottom: 2rem;" th:text="${errorMessage}">An unexpected error occurred.</p>
+            <a th:href="@{/}" class="btn btn-primary">Go to Homepage</a>
+        </div>
+    </div>
+
+    <div th:replace="~{fragments :: footer}"></div>
+</body>
+</html>

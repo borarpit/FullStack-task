@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Applicants - JobPortal</title>
+    <th:block th:replace="~{fragments :: headerContent}"></th:block>
+</head>
+<body>
+    <div th:replace="~{fragments :: navbar}"></div>
+
+    <div class="container">
+        <div class="dashboard-header">
+            <div>
+                <h1>Applicants for <span th:text="${job.title}">Job</span></h1>
+                <p class="text-light">Manage candidates for this position.</p>
+            </div>
+            <a th:href="@{/employer/dashboard}" class="btn btn-outline">Back to Dashboard</a>
+        </div>
+
+        <div th:if="${#lists.isEmpty(applicants)}" style="text-align: center; padding: 4rem;" class="card">
+            <h3>No applications received yet for this job.</h3>
+        </div>
+
+        <div th:each="app : ${applicants}" class="job-card" style="display: block;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                <div>
+                    <h3 th:text="${app.student.name}">Student Name</h3>
+                    <p style="color: var(--text-light);"><span th:text="${app.student.email}">email@example.com</span></p>
+                    <p style="margin-top: 0.5rem;"><strong>Skills:</strong> <span th:text="${app.student.skills}">Java, Python</span></p>
+                    <p><strong>Location:</strong> <span th:text="${app.student.location}">New York</span></p>
+                </div>
+                <div style="text-align: right;">
+                    <span th:class="'status-badge status-' + ${app.status}" th:text="${app.status}">STATUS</span>
+                    <p style="font-size: 0.8rem; color: var(--text-light); margin-top: 0.5rem;">Applied: <span th:text="${#temporals.format(app.appliedDate, 'dd MMM yyyy')}">Date</span></p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <a th:if="${app.student.resumePath != null}" th:href="@{'/uploads/' + ${app.student.resumePath}}" class="btn btn-outline" style="font-size: 0.85rem;" target="_blank">Download Resume</a>
+                    <span th:if="${app.student.resumePath == null}" style="color: var(--danger); font-size: 0.85rem;">Resume not uploaded</span>
+                </div>
+                
+                <form th:action="@{/employer/application/status}" method="post" style="display: flex; gap: 0.5rem;">
+                    <input type="hidden" name="applicationId" th:value="${app.id}">
+                    <input type="hidden" name="jobId" th:value="${job.id}">
+                    <button type="submit" name="status" value="SHORTLISTED" class="btn btn-primary" style="font-size: 0.85rem; background: var(--success);" th:if="${app.status == 'APPLIED'}">Shortlist</button>
+                    <button type="submit" name="status" value="REJECTED" class="btn btn-danger" style="font-size: 0.85rem;" th:if="${app.status == 'APPLIED'}">Reject</button>
+                    <span th:if="${app.status != 'APPLIED'}" style="color: var(--text-light); font-size: 0.85rem italic;">Decision has been made</span>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="~{fragments :: footer}"></div>
+</body>
+</html>

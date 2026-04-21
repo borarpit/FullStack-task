@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>JobPortal - Find Your Dream Job</title>
+    <th:block th:replace="~{fragments :: headerContent}"></th:block>
+</head>
+<body>
+    <div th:replace="~{fragments :: navbar}"></div>
+
+    <div class="container" style="display: flex; align-items: center; justify-content: center; min-height: 80vh; text-align: center;">
+        <div class="fade-in">
+            <h1 style="font-size: 3.5rem; margin-bottom: 1rem; background: linear-gradient(to right, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Connect. Apply. Succeed.</h1>
+            <p style="font-size: 1.2rem; color: var(--text-light); max-width: 600px; margin: 0 auto 2rem;">
+                The ultimate platform for students to find their careers and employers to find the best talent.
+            </p>
+            <div style="display: flex; gap: 1rem; justify-content: center;">
+                <a th:href="@{/register}" class="btn btn-primary" style="padding: 1rem 2rem;">Get Started</a>
+                <a th:href="@{/login}" class="btn btn-outline" style="padding: 1rem 2rem;">Login Dashboard</a>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="~{fragments :: footer}"></div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:fragment="headerContent">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script th:src="@{/js/script.js}" defer></script>
+</head>
+<body>
+
+<div th:fragment="navbar">
+    <nav>
+        <a th:href="@{/}" class="logo">JobPortal</a>
+        <div class="nav-links">
+            <a th:href="@{/}">Home</a>
+            
+            <span sec:authorize="hasRole('STUDENT')">
+                <a th:href="@{/student/dashboard}">Dashboard</a>
+                <a th:href="@{/student/jobs}">Browse Jobs</a>
+                <a th:href="@{/student/profile}">Profile</a>
+            </span>
+            
+            <span sec:authorize="hasRole('EMPLOYER')">
+                <a th:href="@{/employer/dashboard}">Dashboard</a>
+                <a th:href="@{/employer/post-job}">Post Job</a>
+            </span>
+            
+            <span sec:authorize="hasRole('ADMIN')">
+                <a th:href="@{/admin/dashboard}">Admin Panel</a>
+            </span>
+
+            <span sec:authorize="isAuthenticated()">
+                <form th:action="@{/logout}" method="post" style="display:inline;">
+                    <button type="submit" class="btn btn-outline" style="padding: 5px 15px;">Logout</button>
+                </form>
+            </span>
+            
+            <span sec:authorize="!isAuthenticated()">
+                <a th:href="@{/login}">Login</a>
+                <a th:href="@{/register}" class="btn btn-primary">Register</a>
+            </span>
+        </div>
+    </nav>
+</div>
+
+<footer th:fragment="footer">
+    <div style="text-align: center; padding: 2rem; color: var(--text-light);">
+        &copy; 2026 JobPortal. Built for Excellence.
+    </div>
+</footer>
+
+</body>
+</html>

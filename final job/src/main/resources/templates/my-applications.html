@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>My Applications - JobPortal</title>
+    <th:block th:replace="~{fragments :: headerContent}"></th:block>
+</head>
+<body>
+    <div th:replace="~{fragments :: navbar}"></div>
+
+    <div class="container">
+        <div class="dashboard-header">
+            <h1>My Job Applications</h1>
+            <a th:href="@{/student/jobs}" class="btn btn-primary">Browse More Jobs</a>
+        </div>
+
+        <div th:if="${#lists.isEmpty(applications)}" style="text-align: center; padding: 4rem;" class="card">
+            <h3>You haven't applied for any jobs yet.</h3>
+            <p style="margin-top: 1rem; color: var(--text-light);">Start your career journey today!</p>
+        </div>
+
+        <div th:each="app : ${applications}" class="job-card">
+            <div>
+                <h3 th:text="${app.job.title}">Job Title</h3>
+                <p th:text="${app.job.employer.name}" style="color: var(--primary); font-weight: 600;">Company</p>
+                <div style="display: flex; gap: 1rem; margin-top: 0.5rem; font-size: 0.9rem; color: var(--text-light);">
+                    <span>📍 <span th:text="${app.job.location}">Location</span></span>
+                    <span>Applied on: <span th:text="${#temporals.format(app.appliedDate, 'dd MMM yyyy')}">Date</span></span>
+                </div>
+            </div>
+            <div style="text-align: right;">
+                <span th:class="'status-badge status-' + ${app.status}" th:text="${app.status}">STATUS</span>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="~{fragments :: footer}"></div>
+</body>
+</html>

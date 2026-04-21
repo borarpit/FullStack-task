@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Job - JobPortal</title>
+    <th:block th:replace="~{fragments :: headerContent}"></th:block>
+</head>
+<body>
+    <div th:replace="~{fragments :: navbar}"></div>
+
+    <div class="container" style="max-width: 800px;">
+        <div class="dashboard-header">
+            <h1>Edit Job Listing</h1>
+        </div>
+
+        <div class="card">
+            <form th:action="@{/employer/edit-job/{id}(id=${job.id})}" th:object="${job}" method="post">
+                <div class="form-group">
+                    <label>Job Title</label>
+                    <input type="text" th:field="*{title}" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Skills Required (Comma separated)</label>
+                    <input type="text" th:field="*{skillsRequired}" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Location</label>
+                    <input type="text" th:field="*{location}" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Annual Salary ($)</label>
+                    <input type="number" th:field="*{salary}" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Job Description</label>
+                    <textarea th:field="*{description}" class="form-control" rows="8" required></textarea>
+                </div>
+
+                <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                    <button type="submit" class="btn btn-primary">Update Job</button>
+                    <a th:href="@{/employer/dashboard}" class="btn btn-outline">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div th:replace="~{fragments :: footer}"></div>
+</body>
+</html>

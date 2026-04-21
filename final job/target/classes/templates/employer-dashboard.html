@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Employer Dashboard - JobPortal</title>
+    <th:block th:replace="~{fragments :: headerContent}"></th:block>
+</head>
+<body>
+    <div th:replace="~{fragments :: navbar}"></div>
+
+    <div class="container">
+        <div class="dashboard-header">
+            <h1>Employer Dashboard</h1>
+            <a th:href="@{/employer/post-job}" class="btn btn-primary">+ Post New Job</a>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3 th:text="${totalJobs}">0</h3>
+                <p>Jobs Posted</p>
+            </div>
+            <div class="stat-card">
+                <h3 th:text="${totalApplicants}">0</h3>
+                <p>Total Applicants</p>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top: 2rem;">
+            <h2 style="margin-bottom: 1.5rem;">Your Job Postings</h2>
+            <div th:if="${#lists.isEmpty(jobs)}" style="text-align: center; padding: 2rem; color: var(--text-light);">
+                You haven't posted any jobs yet.
+            </div>
+            <div th:each="job : ${jobs}" class="job-card">
+                <div style="flex: 1;">
+                    <h3 th:text="${job.title}">Job Title</h3>
+                    <p style="color: var(--text-light); font-size: 0.9rem;">📍 <span th:text="${job.location}">Location</span> | 💰 $<span th:text="${#numbers.formatDecimal(job.salary, 0, 'COMMA', 0, 'POINT')}">Salary</span></p>
+                </div>
+                <div style="display: flex; gap: 0.8rem;">
+                    <a th:href="@{/employer/applicants/{id}(id=${job.id})}" class="btn btn-outline" style="font-size: 0.9rem;">View Applicants</a>
+                    <a th:href="@{/employer/edit-job/{id}(id=${job.id})}" class="btn btn-primary" style="font-size: 0.9rem; background: #64748b;">Edit</a>
+                    <a th:href="@{/employer/delete-job/{id}(id=${job.id})}" class="btn btn-danger" style="font-size: 0.9rem;" onclick="return confirm('Delete this job listing?')">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="~{fragments :: footer}"></div>
+</body>
+</html>

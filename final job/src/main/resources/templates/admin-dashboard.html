@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Dashboard - JobPortal</title>
+    <th:block th:replace="~{fragments :: headerContent}"></th:block>
+</head>
+<body>
+    <div th:replace="~{fragments :: navbar}"></div>
+
+    <div class="container">
+        <div class="dashboard-header">
+            <h1>Admin Control Center</h1>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3 th:text="${totalUsers}">0</h3>
+                <p>Total Registered Users</p>
+            </div>
+            <div class="stat-card">
+                <h3 th:text="${totalJobs}">0</h3>
+                <p>Total Job Postings</p>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top: 2rem;">
+            <h2 style="margin-bottom: 1.5rem;">User Listings</h2>
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="text-align: left; border-bottom: 2px solid var(--border);">
+                        <th style="padding: 1rem;">ID</th>
+                        <th style="padding: 1rem;">Name</th>
+                        <th style="padding: 1rem;">Email</th>
+                        <th style="padding: 1rem;">Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="user : ${users}" style="border-bottom: 1px solid var(--border);">
+                        <td style="padding: 1rem;" th:text="${user.id}">1</td>
+                        <td style="padding: 1rem;" th:text="${user.name}">John</td>
+                        <td style="padding: 1rem;" th:text="${user.email}">john@example.com</td>
+                        <td style="padding: 1rem;">
+                            <span th:class="'status-badge status-' + ${user.role} " th:text="${user.role}" style="background: #f1f5f9; color: #475569;">ROLE</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div th:replace="~{fragments :: footer}"></div>
+</body>
+</html>

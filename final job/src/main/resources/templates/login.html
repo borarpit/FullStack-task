@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login - JobPortal</title>
+    <th:block th:replace="~{fragments :: headerContent}"></th:block>
+</head>
+<body>
+    <div th:replace="~{fragments :: navbar}"></div>
+
+    <div class="container" style="max-width: 450px; padding-top: 5rem;">
+        <div class="card">
+            <h2 style="margin-bottom: 1.5rem; text-align: center;">Welcome Back</h2>
+            
+            <div th:if="${param.error}" class="alert" style="background: var(--danger); color: white; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; text-align: center;">
+                Invalid email or password.
+            </div>
+
+            <div th:if="${param.logout}" class="alert" style="background: var(--success); color: white; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; text-align: center;">
+                You have been logged out.
+            </div>
+
+            <div th:if="${param.success}" class="alert" style="background: var(--success); color: white; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; text-align: center;">
+                Registration successful! Please login.
+            </div>
+
+            <form th:action="@{/login}" method="post">
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" name="username" class="form-control" placeholder="example@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" name="password" class="form-control" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.8rem;">Login</button>
+            </form>
+            
+            <p style="text-align: center; margin-top: 1.5rem; color: var(--text-light);">
+                Don't have an account? <a th:href="@{/register}" style="color: var(--primary); font-weight: 600;">Register here</a>
+            </p>
+        </div>
+    </div>
+
+    <div th:replace="~{fragments :: footer}"></div>
+</body>
+</html>

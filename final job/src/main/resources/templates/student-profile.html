@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Profile - JobPortal</title>
+    <th:block th:replace="~{fragments :: headerContent}"></th:block>
+</head>
+<body>
+    <div th:replace="~{fragments :: navbar}"></div>
+
+    <div class="container" style="max-width: 700px;">
+        <div class="dashboard-header">
+            <h1>Update Profile</h1>
+        </div>
+
+        <div class="card">
+            <form th:action="@{/student/profile/update}" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" name="name" class="form-control" th:value="${user.name}" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Skills (Comma separated)</label>
+                    <input type="text" name="skills" class="form-control" th:value="${user.skills}" placeholder="Java, Spring Boot, MySQL">
+                </div>
+
+                <div class="form-group">
+                    <label>Preferred Location</label>
+                    <input type="text" name="location" class="form-control" th:value="${user.location}" placeholder="New York, Remote, etc.">
+                </div>
+
+                <div class="form-group">
+                    <label>Resume (PDF/Word)</label>
+                    <input type="file" name="resume" class="form-control" accept=".pdf,.doc,.docx">
+                    <p style="font-size: 0.85rem; color: var(--text-light); margin-top: 0.5rem;" th:if="${user.resumePath != null}">
+                        Current Resume: <span th:text="${user.resumePath}">file.pdf</span>
+                    </p>
+                </div>
+
+                <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <a th:href="@{/student/dashboard}" class="btn btn-outline">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div th:replace="~{fragments :: footer}"></div>
+</body>
+</html>

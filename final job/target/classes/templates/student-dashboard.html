@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Student Dashboard - JobPortal</title>
+    <th:block th:replace="~{fragments :: headerContent}"></th:block>
+</head>
+<body>
+    <div th:replace="~{fragments :: navbar}"></div>
+
+    <div class="container">
+        <div class="dashboard-header text-center">
+            <div>
+                <h1>Welcome, <span th:text="${user.name}">Student</span>!</h1>
+                <p class="text-light">Manage your profile and track your applications.</p>
+            </div>
+            <div style="display:flex; gap:1rem;">
+                <a th:href="@{/student/jobs}" class="btn btn-primary">Find New Jobs</a>
+                <a th:href="@{/student/profile}" class="btn btn-outline">Edit Profile</a>
+            </div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3 th:text="${applications.size()}">0</h3>
+                <p>Total Applications</p>
+            </div>
+            <div class="stat-card">
+                <h3 th:text="${user.skills != null ? user.skills.split(',').length : 0}">0</h3>
+                <p>Skills Listed</p>
+            </div>
+            <div class="stat-card">
+                <h3 th:text="${user.resumePath != null ? 'Uploaded' : 'Missing'}">Missing</h3>
+                <p>Resume Status</p>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top: 2rem;">
+            <h2 style="margin-bottom: 1.5rem;">Recent Applications</h2>
+            <div th:if="${#lists.isEmpty(applications)}" style="text-align: center; padding: 2rem; color: var(--text-light);">
+                You haven't applied to any jobs yet. <a th:href="@{/student/jobs}" style="color: var(--primary);">Start browsing!</a>
+            </div>
+            <div th:each="app : ${applications}" class="job-card">
+                <div>
+                    <h3 th:text="${app.job.title}">Job Title</h3>
+                    <p th:text="${app.job.employer.name}" style="color: var(--text-light); font-size: 0.9rem;">Company Name</p>
+                    <p style="font-size: 0.8rem; color: var(--text-light);">Applied on: <span th:text="${#temporals.format(app.appliedDate, 'dd MMM yyyy')}">Date</span></p>
+                </div>
+                <div>
+                    <span th:class="'status-badge status-' + ${app.status}" th:text="${app.status}">STATUS</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="~{fragments :: footer}"></div>
+</body>
+</html>

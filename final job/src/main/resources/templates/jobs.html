@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Browse Jobs - JobPortal</title>
+    <th:block th:replace="~{fragments :: headerContent}"></th:block>
+</head>
+<body>
+    <div th:replace="~{fragments :: navbar}"></div>
+
+    <div class="container">
+        <div class="dashboard-header">
+            <h1>Browse Available Jobs</h1>
+        </div>
+
+        <div class="card" style="margin-bottom: 2rem;">
+            <form th:action="@{/student/jobs}" method="get" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; align-items: end;">
+                <div class="form-group" style="margin-bottom: 0;">
+                    <label>Job Title</label>
+                    <input type="text" name="title" class="form-control" placeholder="Search by title..." th:value="${param.title}">
+                </div>
+                <div class="form-group" style="margin-bottom: 0;">
+                    <label>Skill</label>
+                    <input type="text" name="skill" class="form-control" placeholder="Search by skill..." th:value="${param.skill}">
+                </div>
+                <div class="form-group" style="margin-bottom: 0;">
+                    <label>Location</label>
+                    <input type="text" name="location" class="form-control" placeholder="Search by location..." th:value="${param.location}">
+                </div>
+                <button type="submit" class="btn btn-primary">Search Jobs</button>
+            </form>
+        </div>
+
+        <div th:if="${#lists.isEmpty(jobs)}" style="text-align: center; padding: 3rem;">
+            <h3>No jobs found matching your criteria.</h3>
+            <a th:href="@{/student/jobs}" style="color: var(--primary);">View all jobs</a>
+        </div>
+
+        <div th:each="job : ${jobs}" class="job-card">
+            <div style="flex: 1;">
+                <h3 th:text="${job.title}">Job Title</h3>
+                <p th:text="${job.employer.name}" style="color: var(--primary); font-weight: 600;">Company</p>
+                <div style="display: flex; gap: 1.5rem; margin-top: 0.5rem; font-size: 0.9rem; color: var(--text-light);">
+                    <span>📍 <span th:text="${job.location}">Location</span></span>
+                    <span>💰 $<span th:text="${#numbers.formatDecimal(job.salary, 0, 'COMMA', 0, 'POINT')}">Salary</span></span>
+                    <span>🛠️ <span th:text="${job.skillsRequired}">Skills</span></span>
+                </div>
+                <p th:text="${job.description}" style="margin-top: 1rem; font-size: 0.95rem; color: var(--text); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">Description</p>
+            </div>
+            <div style="margin-left: 2rem;">
+                <form th:action="@{/student/apply/{id}(id=${job.id})}" method="post">
+                    <button type="submit" class="btn btn-primary">Apply Now</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="~{fragments :: footer}"></div>
+</body>
+</html>
